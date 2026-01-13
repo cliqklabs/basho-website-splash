@@ -1,0 +1,128 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-primary: #f8f6f3;
+    --bg-gradient: linear-gradient(135deg, #f8f6f3 0%, #ebe7e0 50%, #e0dcd4 100%);
+    --text-primary: #1a1a1a;
+    --text-muted: #5a5a5a;
+    --accent: #c9a86c;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg-gradient);
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.container {
+    text-align: center;
+    padding: 2rem;
+}
+
+.content {
+    animation: fadeInUp 1.2s ease-out;
+}
+
+.logo {
+    max-width: 320px;
+    width: 100%;
+    height: auto;
+    margin-bottom: 2.5rem;
+    animation: subtlePulse 4s ease-in-out infinite;
+}
+
+.divider {
+    width: 60px;
+    height: 2px;
+    background: var(--accent);
+    margin: 0 auto 2rem auto;
+    animation: expandWidth 1s ease-out 0.5s both;
+}
+
+.tagline {
+    font-size: 1.125rem;
+    font-weight: 300;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    animation: fadeIn 1s ease-out 0.8s both;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes expandWidth {
+    from {
+        width: 0;
+    }
+    to {
+        width: 60px;
+    }
+}
+
+@keyframes subtlePulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.85;
+    }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .logo {
+        max-width: 240px;
+    }
+    
+    .tagline {
+        font-size: 0.9rem;
+        letter-spacing: 0.25em;
+    }
+}
+
+/* Add subtle texture overlay */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)'/%3E%3C/svg%3E");
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: -1;
+}
+
