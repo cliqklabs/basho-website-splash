@@ -1,27 +1,1486 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Basho | Coming Soon</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Basho Group — Places of Belonging</title>
+  <meta name="description" content="Basho Group is a real estate development firm creating places worth belonging to — built with analytical rigor and cultural intentionality. West Palm Beach, FL.">
+  <meta name="theme-color" content="#000000">
+  <link rel="canonical" href="https://bashogroup.com">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23000'/><polygon points='22 0 0 0 0 28 8 28 22 0' fill='%23fff'/><polygon points='24 0 10 28 32 28 32 0 24 0' fill='%23fff'/></svg>">
+  <meta property="og:title" content="Basho Group — Places of Belonging">
+  <meta property="og:description" content="Real estate development built with analytical rigor and cultural intentionality. West Palm Beach, FL.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://bashogroup.com">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:site_name" content="Basho Group">
+  <!-- TODO: Add og:image when social share image is created (1200x630) -->
+  <!-- <meta property="og:image" content="https://bashogroup.com/og-image.jpg"> -->
+  <!-- <meta property="og:image:width" content="1200"> -->
+  <!-- <meta property="og:image:height" content="630"> -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Basho Group — Places of Belonging">
+  <meta name="twitter:description" content="Real estate development built with analytical rigor and cultural intentionality.">
+  <!-- <meta name="twitter:image" content="https://bashogroup.com/og-image.jpg"> -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Basho Group",
+    "description": "Real estate development firm creating places worth belonging to — built with analytical rigor and cultural intentionality.",
+    "url": "https://bashogroup.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "West Palm Beach",
+      "addressRegion": "FL",
+      "addressCountry": "US"
+    },
+    "founder": {
+      "@type": "Person",
+      "name": "Gopal Rajegowda",
+      "jobTitle": "Managing Partner"
+    },
+    "knowsAbout": ["Real Estate Development", "Mixed-Use Development", "Placemaking", "Urban Development"]
+  }
+  </script>
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+  <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800,900&display=swap" rel="stylesheet">
+
+  <style>
+    /* ═══════════════════════════════════════════
+       RESET & CUSTOM PROPERTIES
+    ═══════════════════════════════════════════ */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --primary: #000000;
+      --secondary: #1A1A1A;
+      --accent: #333333;
+      --void: #FFFFFF;
+      --light-bg: #F5F5F5;
+      --border: #E0E0E0;
+      --alert: #C62828;
+
+      --font: 'Cabinet Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+      --section-pad: clamp(80px, 12vw, 160px);
+      --content-max: 1200px;
+      --content-narrow: 800px;
+
+      --z-grain: 1;
+      --z-content: 2;
+      --z-nav: 100;
+      --z-skip: 200;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: var(--font);
+      font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+      line-height: 1.7;
+      color: var(--secondary);
+      background: var(--void);
+      overflow-x: hidden;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { color: inherit; }
+
+    :focus-visible {
+      outline: 2px solid var(--primary);
+      outline-offset: 3px;
+    }
+
+    /* ═══════════════════════════════════════════
+       GRAIN TEXTURE
+    ═══════════════════════════════════════════ */
+    .grain { position: relative; }
+    .grain::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+      opacity: 0.03;
+      pointer-events: none;
+      z-index: var(--z-grain);
+      mix-blend-mode: overlay;
+    }
+
+    /* ═══════════════════════════════════════════
+       SCROLL REVEAL SYSTEM
+    ═══════════════════════════════════════════ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .reveal.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    .reveal-stagger.revealed > * {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-stagger > * {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .reveal-stagger > *:nth-child(1) { transition-delay: 0s; }
+    .reveal-stagger > *:nth-child(2) { transition-delay: 0.12s; }
+    .reveal-stagger > *:nth-child(3) { transition-delay: 0.24s; }
+    .reveal-stagger > *:nth-child(4) { transition-delay: 0.36s; }
+    .reveal-stagger > *:nth-child(5) { transition-delay: 0.48s; }
+    .reveal-stagger > *:nth-child(6) { transition-delay: 0.6s; }
+
+    /* ═══════════════════════════════════════════
+       SHARED LAYOUT
+    ═══════════════════════════════════════════ */
+    .section-inner {
+      max-width: var(--content-max);
+      margin: 0 auto;
+      padding: 0 clamp(24px, 5vw, 48px);
+    }
+
+    .section-label {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 2em;
+    }
+
+    /* ═══════════════════════════════════════════
+       NAVIGATION
+    ═══════════════════════════════════════════ */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: var(--z-nav);
+      padding: 0 clamp(24px, 5vw, 48px);
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background-color 0.4s ease, box-shadow 0.4s ease;
+    }
+    .nav--scrolled {
+      background-color: var(--primary);
+      box-shadow: 0 1px 0 rgba(255,255,255,0.06);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: var(--void);
+    }
+    .nav-logo svg {
+      height: 24px;
+      width: auto;
+      fill: var(--void);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: clamp(16px, 2.5vw, 32px);
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      transition: color 0.3s ease;
+      white-space: nowrap;
+    }
+    .nav-links a:hover,
+    .nav-links a:focus { color: var(--void); }
+
+    /* Mobile hamburger */
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      position: relative;
+      width: 32px;
+      height: 32px;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 20px;
+      height: 1.5px;
+      background: var(--void);
+      position: absolute;
+      left: 6px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .nav-toggle span:nth-child(1) { top: 10px; }
+    .nav-toggle span:nth-child(2) { top: 15px; }
+    .nav-toggle span:nth-child(3) { top: 20px; }
+
+    .nav-toggle.active span:nth-child(1) {
+      transform: translateY(5px) rotate(45deg);
+    }
+    .nav-toggle.active span:nth-child(2) { opacity: 0; }
+    .nav-toggle.active span:nth-child(3) {
+      transform: translateY(-5px) rotate(-45deg);
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        position: fixed;
+        top: 72px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: var(--primary);
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 40px clamp(24px, 5vw, 48px);
+        gap: 24px;
+        transform: translateX(100%);
+        transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+      .nav-links.open { transform: translateX(0); }
+      .nav-links a {
+        font-size: 1rem;
+        color: rgba(255,255,255,0.8);
+      }
+      .nav-toggle { display: block; }
+    }
+
+    /* ═══════════════════════════════════════════
+       HERO
+    ═══════════════════════════════════════════ */
+    .hero {
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: var(--primary);
+      color: var(--void);
+      position: relative;
+      overflow: hidden;
+      padding: 72px 24px 48px;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: url('public/wpb-hero.png') center center / cover no-repeat;
+      filter: saturate(0.6) brightness(0.55);
+    }
+
+    .hero-icon {
+      width: clamp(120px, 20vw, 280px);
+      height: auto;
+      margin-bottom: clamp(32px, 5vw, 64px);
+      opacity: 0;
+      transform: scale(0.9);
+      animation: heroIconIn 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s forwards;
+    }
+    .hero-icon svg {
+      width: 100%;
+      height: auto;
+      fill: var(--void);
+    }
+
+    .hero-title {
+      text-align: center;
+    }
+    .hero-name {
+      display: block;
+      font-size: clamp(3.5rem, 3rem + 7vw, 11rem);
+      font-weight: 900;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      line-height: 0.85;
+      opacity: 0;
+      transform: translateY(40px);
+      animation: heroFadeUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s forwards;
+    }
+
+    .hero-tagline {
+      font-size: clamp(2rem, 1.5rem + 3vw, 4.5rem);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--void);
+      text-align: center;
+      line-height: 1.2;
+      text-shadow: 0 2px 24px rgba(0,0,0,0.5);
+      opacity: 0;
+      transform: translateY(24px);
+      animation: heroFadeUp 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.4s forwards;
+    }
+
+    .scroll-cue {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: var(--z-content);
+      opacity: 0;
+      animation: heroFadeUp 0.8s ease 1.8s forwards;
+    }
+    .scroll-line {
+      display: block;
+      width: 1px;
+      height: 48px;
+      margin: 0 auto;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.3), transparent);
+      animation: scrollPulse 2.5s ease-in-out infinite;
+      transform-origin: top;
+    }
+
+    @keyframes heroIconIn {
+      to { opacity: 0.08; transform: scale(1); }
+    }
+    @keyframes heroFadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.4; transform: scaleY(0.5); }
+      50% { opacity: 1; transform: scaleY(1); }
+    }
+
+    /* ═══════════════════════════════════════════
+       PHILOSOPHY
+    ═══════════════════════════════════════════ */
+    .philosophy {
+      background: var(--void);
+      padding: var(--section-pad) 0;
+    }
+    .philosophy .section-label {
+      color: var(--accent);
+      margin-bottom: 1.5em;
+    }
+    .philosophy-heading {
+      font-size: clamp(2.2rem, 1.6rem + 3vw, 4rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      color: var(--primary);
+      margin-bottom: clamp(48px, 6vw, 80px);
+      max-width: var(--content-narrow);
+      text-wrap: balance;
+    }
+
+    .philosophy-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(48px, 8vw, 120px);
+      align-items: start;
+    }
+
+    .philosophy-body p {
+      margin-bottom: 1.3em;
+      color: var(--accent);
+      line-height: 1.8;
+      text-wrap: pretty;
+    }
+    .philosophy-body p:last-child { margin-bottom: 0; }
+
+    .philosophy-quote {
+      position: sticky;
+      top: 120px;
+      padding: clamp(32px, 4vw, 56px);
+      background: var(--light-bg);
+    }
+    .philosophy-quote-mark {
+      display: block;
+      font-size: clamp(4rem, 3rem + 4vw, 8rem);
+      font-weight: 900;
+      line-height: 0.6;
+      color: var(--border);
+      margin-bottom: 0.2em;
+      user-select: none;
+    }
+    .philosophy-quote blockquote {
+      font-size: clamp(1.3rem, 1.1rem + 1vw, 1.8rem);
+      font-weight: 700;
+      line-height: 1.35;
+      color: var(--primary);
+      margin-bottom: 1.2em;
+    }
+    .philosophy-quote cite {
+      font-style: normal;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+    }
+
+    @media (max-width: 768px) {
+      .philosophy-grid {
+        grid-template-columns: 1fr;
+      }
+      .philosophy-quote {
+        position: static;
+      }
+    }
+
+    /* ═══════════════════════════════════════════
+       TRACK RECORD
+    ═══════════════════════════════════════════ */
+    .track-record {
+      background: var(--light-bg);
+      padding: var(--section-pad) 0;
+    }
+    .track-record .section-label { color: var(--accent); }
+
+    .track-record-heading {
+      font-size: clamp(2rem, 1.5rem + 2.5vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      color: var(--primary);
+      margin-bottom: clamp(40px, 6vw, 80px);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(32px, 5vw, 80px);
+      margin-bottom: clamp(48px, 8vw, 96px);
+    }
+
+    @media (max-width: 540px) {
+      .stats { grid-template-columns: 1fr; }
+    }
+    .stat-value {
+      font-size: clamp(3rem, 2.5rem + 3vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: var(--primary);
+    }
+    .stat-label {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-top: 0.5em;
+    }
+
+    .track-record-narrative {
+      max-width: var(--content-narrow);
+    }
+    .track-record-narrative p {
+      margin-bottom: 1.3em;
+      color: var(--accent);
+      line-height: 1.8;
+      text-wrap: pretty;
+    }
+    .track-record-narrative p:last-child { margin-bottom: 0; }
+
+    .projects-strip {
+      margin-top: clamp(48px, 6vw, 80px);
+      padding-top: clamp(24px, 3vw, 40px);
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+      align-items: center;
+    }
+    .projects-strip span {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+    .projects-strip .sep {
+      margin: 0 clamp(12px, 2vw, 24px);
+      color: var(--border);
+      font-size: 0.6rem;
+    }
+
+    /* ═══════════════════════════════════════════
+       OPPORTUNITY
+    ═══════════════════════════════════════════ */
+    .opportunity {
+      background: var(--primary);
+      color: var(--void);
+      padding: var(--section-pad) 0;
+    }
+    .opportunity .section-label { color: rgba(255,255,255,0.4); }
+
+    .opportunity-heading {
+      font-size: clamp(2rem, 1.5rem + 2.5vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 1em;
+    }
+
+    .opportunity-intro {
+      max-width: var(--content-narrow);
+      font-size: clamp(1rem, 0.95rem + 0.3vw, 1.15rem);
+      line-height: 1.8;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: clamp(48px, 6vw, 80px);
+      text-wrap: pretty;
+    }
+
+    .opportunity-pillars {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(24px, 3vw, 48px);
+      margin-bottom: clamp(48px, 6vw, 80px);
+    }
+
+    .opp-pillar {
+      border-top: 1px solid rgba(255,255,255,0.12);
+      padding-top: clamp(24px, 3vw, 40px);
+    }
+    .opp-pillar-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 1.2em;
+    }
+    .opp-pillar-headline {
+      font-size: clamp(1.2rem, 1rem + 0.8vw, 1.8rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 0.8em;
+    }
+    .opp-pillar-body {
+      font-size: clamp(0.9rem, 0.85rem + 0.2vw, 1rem);
+      line-height: 1.75;
+      color: rgba(255,255,255,0.5);
+      text-wrap: pretty;
+    }
+
+    .opp-signals {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: clamp(32px, 4vw, 56px);
+    }
+    .opp-signals-heading {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: clamp(24px, 3vw, 40px);
+    }
+    .opp-signal-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: clamp(16px, 2vw, 32px);
+    }
+    .opp-signal {
+      display: flex;
+      gap: clamp(12px, 1.5vw, 20px);
+      align-items: baseline;
+    }
+    .opp-signal-name {
+      font-size: clamp(0.95rem, 0.9rem + 0.2vw, 1.05rem);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .opp-signal-detail {
+      font-size: clamp(0.85rem, 0.8rem + 0.15vw, 0.95rem);
+      color: rgba(255,255,255,0.45);
+      line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      .opportunity-pillars { grid-template-columns: 1fr; }
+      .opp-signal-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ═══════════════════════════════════════════
+       FOUNDER
+    ═══════════════════════════════════════════ */
+    .founder {
+      background: var(--void);
+      padding: var(--section-pad) 0;
+    }
+    .founder .section-label { color: var(--accent); }
+
+    .founder-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: clamp(40px, 6vw, 100px);
+      align-items: start;
+    }
+
+    .founder-photo {
+      width: 100%;
+      height: auto;
+      display: block;
+      background: var(--light-bg);
+    }
+
+    .founder-heading {
+      font-size: clamp(2rem, 1.5rem + 2.5vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      color: var(--primary);
+      margin-bottom: 0.15em;
+    }
+    .founder-subtitle {
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 2em;
+    }
+
+    .founder-bio p {
+      margin-bottom: 1.3em;
+      color: var(--accent);
+      line-height: 1.8;
+      text-wrap: pretty;
+    }
+    .founder-bio p:last-child { margin-bottom: 0; }
+
+    @media (max-width: 768px) {
+      .founder-grid {
+        grid-template-columns: 1fr;
+      }
+      .founder-photo {
+        max-height: 400px;
+        object-fit: cover;
+        object-position: center top;
+      }
+    }
+
+    /* ═══════════════════════════════════════════
+       METHOD
+    ═══════════════════════════════════════════ */
+    .method {
+      background: var(--light-bg);
+      padding: var(--section-pad) 0;
+    }
+    .method .section-label { color: var(--accent); }
+
+    .method-heading {
+      font-size: clamp(2rem, 1.5rem + 2.5vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      color: var(--primary);
+      margin-bottom: 0.8em;
+    }
+
+    .method-intro {
+      max-width: var(--content-narrow);
+      color: var(--accent);
+      line-height: 1.8;
+      margin-bottom: clamp(48px, 6vw, 80px);
+      text-wrap: pretty;
+    }
+
+    .filter-heading {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 2em;
+    }
+
+    .filter-list {
+      list-style: none;
+    }
+    .filter-item {
+      display: grid;
+      grid-template-columns: 60px 140px 1fr;
+      gap: 0 clamp(16px, 2.5vw, 32px);
+      padding: clamp(20px, 3vw, 32px) 0;
+      border-top: 1px solid var(--border);
+      align-items: baseline;
+    }
+    .filter-item:last-child {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .filter-numeral {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--accent);
+      letter-spacing: 0.03em;
+    }
+    .filter-name {
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--primary);
+      white-space: nowrap;
+    }
+    .filter-question {
+      font-size: clamp(0.95rem, 0.9rem + 0.2vw, 1.05rem);
+      font-weight: 400;
+      color: var(--secondary);
+      line-height: 1.6;
+    }
+
+    .method-framework {
+      margin-top: clamp(48px, 6vw, 80px);
+      max-width: var(--content-narrow);
+    }
+    .method-framework p {
+      color: var(--accent);
+      line-height: 1.8;
+      margin-bottom: 1em;
+      text-wrap: pretty;
+    }
+    .method-framework p:last-child { margin-bottom: 0; }
+
+    @media (max-width: 768px) {
+      .filter-item {
+        grid-template-columns: 48px 1fr;
+        gap: 4px clamp(12px, 2vw, 24px);
+      }
+      .filter-name {
+        grid-column: 2;
+      }
+      .filter-question {
+        grid-column: 1 / -1;
+        padding-top: 8px;
+      }
+    }
+
+    /* ═══════════════════════════════════════════
+       CONTACT
+    ═══════════════════════════════════════════ */
+    .contact {
+      background: var(--primary);
+      color: var(--void);
+      padding: var(--section-pad) 0;
+    }
+
+    .contact-heading {
+      font-size: clamp(2rem, 1.5rem + 2.5vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: clamp(32px, 4vw, 56px);
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .contact-email {
+      font-size: clamp(1.1rem, 1rem + 0.5vw, 1.4rem);
+      font-weight: 500;
+      text-decoration: none;
+      color: var(--void);
+      letter-spacing: 0.02em;
+      transition: opacity 0.3s ease;
+    }
+    .contact-email:hover { opacity: 0.7; }
+
+    .contact-location {
+      font-size: 0.85rem;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      color: rgba(255,255,255,0.45);
+    }
+
+    /* ═══════════════════════════════════════════
+       INVESTOR CIRCLE
+    ═══════════════════════════════════════════ */
+    .circle {
+      background: var(--primary);
+      color: var(--void);
+      padding: var(--section-pad) 0;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .circle .section-label { color: rgba(255,255,255,0.4); }
+
+    .circle-heading {
+      font-size: clamp(2rem, 1.5rem + 2.5vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 0.8em;
+    }
+
+    .circle-intro {
+      max-width: var(--content-narrow);
+      font-size: clamp(1rem, 0.95rem + 0.3vw, 1.15rem);
+      line-height: 1.8;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: clamp(40px, 5vw, 64px);
+      text-wrap: pretty;
+    }
+
+    .circle-form {
+      max-width: 480px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .circle-field {
+      appearance: none;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+      color: var(--void);
+      font-family: var(--font);
+      font-size: 1rem;
+      font-weight: 400;
+      padding: 12px 0;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+    .circle-field::placeholder {
+      color: rgba(255,255,255,0.3);
+      font-weight: 400;
+    }
+    .circle-field:focus {
+      border-color: rgba(255,255,255,0.6);
+    }
+
+    .circle-submit {
+      align-self: flex-start;
+      margin-top: 8px;
+      background: var(--void);
+      color: var(--primary);
+      border: none;
+      font-family: var(--font);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 14px 32px;
+      cursor: pointer;
+      transition: opacity 0.3s ease;
+    }
+    .circle-submit:hover { opacity: 0.85; }
+    .circle-submit:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .circle-thankyou {
+      display: none;
+    }
+    .circle-thankyou.active {
+      display: block;
+    }
+    .circle-thankyou-heading {
+      font-size: clamp(1.4rem, 1.2rem + 1vw, 2rem);
+      font-weight: 700;
+      margin-bottom: 0.6em;
+    }
+    .circle-thankyou-body {
+      color: rgba(255,255,255,0.6);
+      line-height: 1.8;
+      max-width: var(--content-narrow);
+      text-wrap: pretty;
+    }
+
+    .circle-error {
+      font-size: 0.85rem;
+      color: var(--alert);
+      min-height: 1.2em;
+    }
+
+    /* ═══════════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════════ */
+    .footer {
+      background: var(--primary);
+      color: rgba(255,255,255,0.5);
+      padding: clamp(32px, 5vw, 56px) 0;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .footer-inner {
+      max-width: var(--content-max);
+      margin: 0 auto;
+      padding: 0 clamp(24px, 5vw, 48px);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    .footer-logo svg {
+      height: 18px;
+      width: auto;
+      fill: rgba(255,255,255,0.5);
+    }
+    .footer-copy {
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.03em;
+    }
+
+    .footer-right {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    .footer-nav {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+    }
+    .footer-nav a {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: rgba(255,255,255,0.5);
+      transition: color 0.3s ease;
+    }
+    .footer-nav a:hover { color: rgba(255,255,255,0.7); }
+
+    .footer-tagline {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.2);
+    }
+
+    @media (max-width: 768px) {
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .footer-right {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+      .footer-nav { flex-wrap: wrap; }
+    }
+
+    /* ═══════════════════════════════════════════
+       SKIP LINK
+    ═══════════════════════════════════════════ */
+    .skip-link {
+      position: absolute;
+      top: -100px;
+      left: 16px;
+      background: var(--void);
+      color: var(--primary);
+      padding: 8px 16px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      text-decoration: none;
+      z-index: var(--z-skip);
+      transition: top 0.2s ease-out;
+    }
+    .skip-link:focus { top: 16px; }
+
+    /* ═══════════════════════════════════════════
+       REDUCED MOTION
+    ═══════════════════════════════════════════ */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .reveal { opacity: 1; transform: none; }
+      .reveal-stagger > * { opacity: 1; transform: none; }
+      .hero-tagline { opacity: 1; transform: none; }
+    }
+  </style>
 </head>
+
 <body>
-    <main class="container">
-        <div class="content">
-            <img 
-                src="public/logos/Basho Logo@2x.png" 
-                alt="Basho Logo" 
-                class="logo"
-            >
-            <div class="divider"></div>
-            <p class="tagline">Coming Soon</p>
+
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- ═══════════════════════════════════════
+       NAVIGATION
+  ═══════════════════════════════════════ -->
+  <nav class="nav" aria-label="Primary navigation">
+    <a href="#" class="nav-logo" aria-label="Basho Group — return to top">
+      <svg viewBox="0 0 243.46 45.3" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <g><path d="M63.16,5.73h17.15c4.24,0,7.26.34,9.19,1.2,2.71,1.25,4.46,3.89,4.46,7.15,0,3.5-1.66,6.1-6.08,7.58,4.86.91,7.26,3.84,7.26,8.35,0,3.55-1.84,6.38-4.81,7.97-2.19,1.2-5.12,1.63-10.33,1.63h-16.85V5.73ZM80.27,18.69c1.22,0,2.23-.05,2.98-.29,1.18-.43,1.66-1.44,1.66-2.78,0-1.2-.48-2.06-1.53-2.5-.74-.34-1.88-.48-2.93-.48h-8.18v6.05h8.01ZM72.26,32.66h7.88c1.49,0,2.8-.1,3.5-.34,1.58-.48,2.14-1.54,2.14-3.12,0-1.44-.53-2.64-1.88-3.17-.88-.38-2.1-.48-3.54-.48h-8.09v7.1Z"/><path d="M95.63,39.62l14.26-33.89h10.85l13.56,33.89h-9.98l-2.49-6.34h-13.91l-2.49,6.34h-9.8ZM119.69,26.51c-2.62-6.86-3.63-9.79-4.68-12.96-1.14,3.31-2.1,6.05-4.9,12.96h9.58Z"/><path d="M140.69,27.81c2.54,3.46,6.96,5.23,10.46,5.23s5.08-1.06,5.08-2.83-.92-2.5-5.47-3.65l-4.59-1.15c-6.87-1.73-9.45-4.99-9.45-10.22,0-6.24,5.56-10.27,14.09-10.27,5.69,0,10.76,1.34,14.96,4.99l-5.43,6.24c-2.76-2.83-6.87-3.89-9.71-3.89-3.63,0-4.68,1.06-4.68,2.74,0,1.44.96,2.02,5.21,3.07l4.64,1.15c7.53,1.87,10.15,5.04,10.15,10.27,0,6.19-5.12,10.99-15.18,10.99-6.65,0-12.56-2.4-16.23-6.77l6.17-5.91Z"/><path d="M169.87,39.62V5.73h9.23v12.43h14V5.73h9.23v33.89h-9.23v-13.73h-14v13.73h-9.23Z"/><path d="M225.31,40.43c-11.81,0-18.81-6.62-18.81-17.86s7.13-17.67,18.68-17.67,18.29,6.96,18.29,17.81c0,12.05-7.79,17.71-18.16,17.71ZM225.04,12.69c-5.43,0-9.19,3.31-9.19,9.79,0,6.82,3.94,10.22,9.32,10.22s8.84-2.98,8.84-10.13c0-6.72-3.63-9.89-8.97-9.89Z"/></g>
+        <g><polygon points="35.96 0 0 0 0 45.3 12.9 45.3 35.96 0"/><polygon points="39.73 0 16.68 45.3 52.61 45.3 52.61 0 39.73 0"/></g>
+      </svg>
+    </a>
+
+    <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">
+      <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+    </button>
+
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#philosophy">Philosophy</a></li>
+      <li><a href="#track-record">Track Record</a></li>
+      <li><a href="#opportunity">Opportunity</a></li>
+      <li><a href="#founder">Founder</a></li>
+      <li><a href="#method">Method</a></li>
+      <li><a href="#circle">Join the Circle</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ═══════════════════════════════════════
+       HERO
+  ═══════════════════════════════════════ -->
+  <header class="hero grain" aria-label="Basho Group">
+    <div class="hero-bg" aria-hidden="true"></div>
+
+    <div class="hero-content">
+      <h1 class="hero-tagline">Places of belonging.<br>Built with rigor.</h1>
+    </div>
+
+    <div class="scroll-cue" aria-hidden="true">
+      <span class="scroll-line"></span>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ═══════════════════════════════════════
+         PHILOSOPHY
+    ═══════════════════════════════════════ -->
+    <section class="philosophy" id="philosophy" aria-labelledby="philosophy-heading">
+      <div class="section-inner">
+        <p class="section-label reveal">Our Philosophy</p>
+        <h2 class="philosophy-heading reveal reveal-delay-1" id="philosophy-heading">The most valuable building is the one the neighborhood would mourn if it disappeared.</h2>
+
+        <div class="philosophy-grid">
+          <div class="philosophy-body reveal reveal-delay-2">
+            <p>Basho Group creates places worth belonging to&hairsp;&mdash;&hairsp;built with analytical rigor and cultural intentionality.</p>
+            <p>In a world fragmenting into digital isolation, the only physical asset that holds enduring value is belonging. We don't build projects. We build antidotes to isolation.</p>
+            <p>Most real estate is developed by spreadsheets, not by experience. Land treated as a yield calculation rather than a canvas creates buildings profitable on paper but bankrupt in culture. We reject that.</p>
+            <p>Our work rests on two pillars: the soul of what we build and the rigor of how we build it. One without the other is incomplete.</p>
+          </div>
+
+          <aside class="philosophy-quote reveal reveal-delay-3">
+            <span class="philosophy-quote-mark" aria-hidden="true">&ldquo;</span>
+            <blockquote>The more valuable an asset is to the community, the more valuable it is to the owners.</blockquote>
+            <cite>&mdash; Gopal Rajegowda</cite>
+          </aside>
         </div>
-    </main>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         TRACK RECORD
+    ═══════════════════════════════════════ -->
+    <section class="track-record" id="track-record" aria-labelledby="track-record-heading">
+      <div class="section-inner">
+        <p class="section-label reveal">Track Record</p>
+        <h2 class="track-record-heading reveal reveal-delay-1" id="track-record-heading">We transformed West Palm Beach.</h2>
+
+        <div class="stats reveal-stagger reveal">
+          <div class="stat">
+            <div class="stat-value">1M+</div>
+            <div class="stat-label">SF Developed</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">$5B+</div>
+            <div class="stat-label">Total Development Value</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">21+</div>
+            <div class="stat-label">Years Institutional Experience</div>
+          </div>
+        </div>
+
+        <div class="track-record-narrative reveal">
+          <p>In 2011, West Palm Beach was still recovering. Gopal Rajegowda arrived at Related Companies and saw what others missed&hairsp;&mdash;&hairsp;a city waiting to be reimagined.</p>
+          <p>Over the following decade, he led the reimagination of CityPlace, developed the Hilton West Palm Beach, and delivered One Flagler&hairsp;&mdash;&hairsp;achieving $150/SF net, the highest Class A office rent in the Southeast.</p>
+          <p>The transformation wasn't accidental. It was the domino effect: each project catalyzing the next, each investment compounding community value. Today, West Palm Beach is one of the most desirable live-work-play destinations in the United States.</p>
+          <p>Basho carries that methodology forward.</p>
+        </div>
+
+        <div class="projects-strip reveal">
+          <span>Hilton West Palm Beach</span><span class="sep" aria-hidden="true">&bull;</span>
+          <span>CityPlace</span><span class="sep" aria-hidden="true">&bull;</span>
+          <span>360 Rosemary</span><span class="sep" aria-hidden="true">&bull;</span>
+          <span>One Flagler</span><span class="sep" aria-hidden="true">&bull;</span>
+          <span>W South Beach</span><span class="sep" aria-hidden="true">&bull;</span>
+          <span>Cosmopolitan Resort &amp; Casino</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         OPPORTUNITY
+    ═══════════════════════════════════════ -->
+    <section class="opportunity grain" id="opportunity" aria-labelledby="opportunity-heading">
+      <div class="section-inner">
+        <p class="section-label reveal">The Opportunity</p>
+        <h2 class="opportunity-heading reveal reveal-delay-1" id="opportunity-heading">The market chose West Palm Beach.</h2>
+        <p class="opportunity-intro reveal reveal-delay-2">Capital arrived before the infrastructure. Elliott Management, Wells Fargo, and ServiceNow all relocated before the institutional anchors that would validate their decision were in the ground. Now the infrastructure is catching up&hairsp;&mdash;&hairsp;and the compounding has only begun.</p>
+
+        <div class="opportunity-pillars reveal-stagger reveal">
+          <div class="opp-pillar">
+            <p class="opp-pillar-label">Education</p>
+            <h3 class="opp-pillar-headline">Vanderbilt University</h3>
+            <p class="opp-pillar-body">$520M graduate campus in West Palm Beach. Executive MBA, finance, AI, engineering, and space technology programs. Opening as early as fall 2026. Stephen Ross committed $50M; broader $250M fundraising campaign launched January 2026.</p>
+          </div>
+          <div class="opp-pillar">
+            <p class="opp-pillar-label">Healthcare</p>
+            <h3 class="opp-pillar-headline">Cleveland Clinic</h3>
+            <p class="opp-pillar-body">200-bed hospital and ambulatory surgery center. $180M+ raised. Outpatient center at 15&nbsp;CityPlace opens November 2027. Full hospital operational by December 2029. World-class healthcare is the final infrastructure signal for permanent high-net-worth migration.</p>
+          </div>
+          <div class="opp-pillar">
+            <p class="opp-pillar-label">Capital</p>
+            <h3 class="opp-pillar-headline">$10B+ Committed</h3>
+            <p class="opp-pillar-body">Related Ross alone has committed approximately $10 billion to West Palm Beach. One Flagler: 100% leased. 10 and 15 CityPlace broke ground in 2025, adding nearly 1M SF of Class A office with anchor tenants ServiceNow and Cleveland Clinic already signed.</p>
+          </div>
+        </div>
+
+        <div class="opp-signals reveal">
+          <p class="opp-signals-heading">Corporate Migration Signals</p>
+          <div class="opp-signal-grid reveal-stagger reveal">
+            <div class="opp-signal">
+              <span class="opp-signal-name">Elliott Management</span>
+              <span class="opp-signal-detail">$41B AUM hedge fund relocated HQ from NYC to WPB</span>
+            </div>
+            <div class="opp-signal">
+              <span class="opp-signal-name">Wells Fargo</span>
+              <span class="opp-signal-detail">Wealth management HQ moving to WPB&hairsp;&mdash;&hairsp;first major U.S. bank to base wealth operations in South Florida</span>
+            </div>
+            <div class="opp-signal">
+              <span class="opp-signal-name">ServiceNow</span>
+              <span class="opp-signal-detail">200,000 SF commitment at 10&nbsp;CityPlace&hairsp;&mdash;&hairsp;one of the largest tech-sector leases in South Florida history</span>
+            </div>
+            <div class="opp-signal">
+              <span class="opp-signal-name">Dycom Industries</span>
+              <span class="opp-signal-detail">Publicly traded telecom engineering firm relocating corporate HQ to WPB</span>
+            </div>
+            <div class="opp-signal">
+              <span class="opp-signal-name">K&ndash;12 Premium</span>
+              <span class="opp-signal-detail">17% private school enrollment vs. 14% state average&hairsp;&mdash;&hairsp;signaling a high-income, family-committed resident base</span>
+            </div>
+            <div class="opp-signal">
+              <span class="opp-signal-name">Population Growth</span>
+              <span class="opp-signal-detail">WPB added 9,600+ residents since the 2020 census&hairsp;&mdash;&hairsp;the largest gain in Palm Beach County</span>
+            </div>
+          </div>
+        </div>
+
+        <p class="opportunity-intro reveal" style="margin-top: clamp(48px, 6vw, 80px); margin-bottom: 0;">The infrastructure is locking in. The question is no longer <em>whether</em> West Palm Beach&hairsp;&mdash;&hairsp;it's <em>how you participate</em>. <a href="#circle" style="color: var(--void); font-weight: 700; text-decoration: underline; text-underline-offset: 4px;">Join the Circle&nbsp;&rarr;</a></p>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         FOUNDER
+    ═══════════════════════════════════════ -->
+    <section class="founder" id="founder" aria-labelledby="founder-heading">
+      <div class="section-inner">
+        <p class="section-label reveal">Founder</p>
+        <div class="founder-grid">
+          <img class="founder-photo reveal reveal-delay-1"
+               src="public/gopal-rajegowda.jpg"
+               srcset="public/gopal-rajegowda-sm.jpg 283w, public/gopal-rajegowda.jpg 495w"
+               sizes="(max-width: 768px) 100vw, 40vw"
+               alt="Gopal Rajegowda, Managing Partner of Basho Group"
+               width="495" height="700"
+               loading="lazy" decoding="async">
+
+          <div class="reveal reveal-delay-2">
+            <h2 class="founder-heading" id="founder-heading">Gopal Rajegowda</h2>
+            <p class="founder-subtitle">Managing Partner</p>
+            <div class="founder-bio">
+              <p>21 years as Partner and EVP at Related Companies, where he led the Southeast division and transformed West Palm Beach from a place people drove through to a place people chose to live.</p>
+              <p>Master's in Real Estate Development from Columbia University. B.A. in Mathematics from Cornell University.</p>
+              <p>Board positions: Norton Museum of Art, Economic Council of Palm Beach County, Chamber of Commerce, Cultural Council, Mayor's Taskforce for Racial and Ethnic Equality.</p>
+              <p>Gopal doesn't just build in communities&hairsp;&mdash;&hairsp;he's embedded in them. That's not a positioning statement. It's a 21-year track record.</p>
+              <p>After two decades building West Palm Beach from within Related Companies, Gopal founded Basho Group to develop on his own terms&hairsp;&mdash;&hairsp;with the same rigor, the same relationships, and a new level of intentionality. This is the next chapter.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         METHOD
+    ═══════════════════════════════════════ -->
+    <section class="method" id="method" aria-labelledby="method-heading">
+      <div class="section-inner">
+        <p class="section-label reveal">The Method</p>
+        <h2 class="method-heading reveal reveal-delay-1" id="method-heading">Question everything. Then build.</h2>
+        <p class="method-intro reveal reveal-delay-2">Our job is not to approve deals&hairsp;&mdash;&hairsp;it's to disprove them. We look for structural flaws, hidden costs, and optimistic assumptions. What survives the filter is worth pursuing.</p>
+
+        <h3 class="filter-heading reveal">The Basho Filter</h3>
+
+        <ol class="filter-list reveal-stagger reveal">
+          <li class="filter-item">
+            <span class="filter-numeral">I</span>
+            <span class="filter-name">Relevance</span>
+            <span class="filter-question">If this building disappeared tomorrow, would the neighborhood mourn it?</span>
+          </li>
+          <li class="filter-item">
+            <span class="filter-numeral">II</span>
+            <span class="filter-name">Awe</span>
+            <span class="filter-question">Does this stop time? Is there a singular moment that takes the breath away?</span>
+          </li>
+          <li class="filter-item">
+            <span class="filter-numeral">III</span>
+            <span class="filter-name">Service</span>
+            <span class="filter-question">Does the environment anticipate the human need for welcome, care, and comfort?</span>
+          </li>
+          <li class="filter-item">
+            <span class="filter-numeral">IV</span>
+            <span class="filter-name">Ground Plane</span>
+            <span class="filter-question">Does the project heal the street?</span>
+          </li>
+          <li class="filter-item">
+            <span class="filter-numeral">V</span>
+            <span class="filter-name">Distinction</span>
+            <span class="filter-question">Are we copying the market, or correcting it?</span>
+          </li>
+          <li class="filter-item">
+            <span class="filter-numeral">VI</span>
+            <span class="filter-name">Landmark</span>
+            <span class="filter-question">Is the art a decoration, or a destination?</span>
+          </li>
+        </ol>
+
+        <div class="method-framework reveal">
+          <p>Projects advance through a 10-phase development process with 6 decision gates&hairsp;&mdash;&hairsp;each a risk-pricing moment, not a formality. Capital is committed incrementally as assumptions are validated.</p>
+          <p>Speed to analysis. Transparency eliminates surprises. Written reports over recurring calls.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         INVESTOR CIRCLE
+    ═══════════════════════════════════════ -->
+    <section class="circle grain" id="circle" aria-labelledby="circle-heading">
+      <div class="section-inner">
+        <p class="section-label reveal">The Circle</p>
+        <h2 class="circle-heading reveal reveal-delay-1" id="circle-heading">Join the Circle.</h2>
+        <p class="circle-intro reveal reveal-delay-2">Basho builds deal by deal&hairsp;&mdash;&hairsp;land, residential, commercial, hospitality, mixed-use. Each opportunity is shared first with our circle. If you're interested in a first look at active deals and participating alongside us, join below.</p>
+
+        <div id="circle-form-wrapper" class="reveal reveal-delay-3">
+          <form class="circle-form" id="circle-form" action="/api/circle" method="POST" novalidate>
+            <input class="circle-field" type="text" name="name" placeholder="Name" required autocomplete="name" aria-label="Your name">
+            <input class="circle-field" type="email" name="email" placeholder="Email" required autocomplete="email" aria-label="Your email">
+            <p class="circle-error" id="circle-error" role="alert"></p>
+            <button class="circle-submit" type="submit">Request Access</button>
+          </form>
+        </div>
+
+        <div class="circle-thankyou" id="circle-thankyou" aria-live="polite">
+          <h3 class="circle-thankyou-heading">You're in.</h3>
+          <p class="circle-thankyou-body">Welcome to the circle. We'll be in touch as opportunities emerge&hairsp;&mdash;&hairsp;no noise, no newsletters, just access.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         CONTACT
+    ═══════════════════════════════════════ -->
+    <section class="contact grain" id="contact" aria-labelledby="contact-heading">
+      <div class="section-inner">
+        <h2 class="contact-heading reveal" id="contact-heading">Get in touch.</h2>
+        <div class="contact-info reveal reveal-delay-1">
+          <a href="mailto:info@bashogroup.com" class="contact-email">info@bashogroup.com</a>
+          <span class="contact-location">West Palm Beach, Florida</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-left">
+        <a href="#" class="footer-logo" aria-label="Basho Group">
+          <svg viewBox="0 0 243.46 45.3" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <g><path d="M63.16,5.73h17.15c4.24,0,7.26.34,9.19,1.2,2.71,1.25,4.46,3.89,4.46,7.15,0,3.5-1.66,6.1-6.08,7.58,4.86.91,7.26,3.84,7.26,8.35,0,3.55-1.84,6.38-4.81,7.97-2.19,1.2-5.12,1.63-10.33,1.63h-16.85V5.73ZM80.27,18.69c1.22,0,2.23-.05,2.98-.29,1.18-.43,1.66-1.44,1.66-2.78,0-1.2-.48-2.06-1.53-2.5-.74-.34-1.88-.48-2.93-.48h-8.18v6.05h8.01ZM72.26,32.66h7.88c1.49,0,2.8-.1,3.5-.34,1.58-.48,2.14-1.54,2.14-3.12,0-1.44-.53-2.64-1.88-3.17-.88-.38-2.1-.48-3.54-.48h-8.09v7.1Z"/><path d="M95.63,39.62l14.26-33.89h10.85l13.56,33.89h-9.98l-2.49-6.34h-13.91l-2.49,6.34h-9.8ZM119.69,26.51c-2.62-6.86-3.63-9.79-4.68-12.96-1.14,3.31-2.1,6.05-4.9,12.96h9.58Z"/><path d="M140.69,27.81c2.54,3.46,6.96,5.23,10.46,5.23s5.08-1.06,5.08-2.83-.92-2.5-5.47-3.65l-4.59-1.15c-6.87-1.73-9.45-4.99-9.45-10.22,0-6.24,5.56-10.27,14.09-10.27,5.69,0,10.76,1.34,14.96,4.99l-5.43,6.24c-2.76-2.83-6.87-3.89-9.71-3.89-3.63,0-4.68,1.06-4.68,2.74,0,1.44.96,2.02,5.21,3.07l4.64,1.15c7.53,1.87,10.15,5.04,10.15,10.27,0,6.19-5.12,10.99-15.18,10.99-6.65,0-12.56-2.4-16.23-6.77l6.17-5.91Z"/><path d="M169.87,39.62V5.73h9.23v12.43h14V5.73h9.23v33.89h-9.23v-13.73h-14v13.73h-9.23Z"/><path d="M225.31,40.43c-11.81,0-18.81-6.62-18.81-17.86s7.13-17.67,18.68-17.67,18.29,6.96,18.29,17.81c0,12.05-7.79,17.71-18.16,17.71ZM225.04,12.69c-5.43,0-9.19,3.31-9.19,9.79,0,6.82,3.94,10.22,9.32,10.22s8.84-2.98,8.84-10.13c0-6.72-3.63-9.89-8.97-9.89Z"/></g>
+            <g><polygon points="35.96 0 0 0 0 45.3 12.9 45.3 35.96 0"/><polygon points="39.73 0 16.68 45.3 52.61 45.3 52.61 0 39.73 0"/></g>
+          </svg>
+        </a>
+        <span class="footer-copy">&copy; 2026 Basho Group. All rights reserved.</span>
+      </div>
+
+      <div class="footer-right">
+        <ul class="footer-nav" aria-label="Footer navigation">
+          <li><a href="#philosophy">Philosophy</a></li>
+          <li><a href="#track-record">Track Record</a></li>
+          <li><a href="#opportunity">Opportunity</a></li>
+          <li><a href="#founder">Founder</a></li>
+          <li><a href="#method">Method</a></li>
+          <li><a href="#circle">The Circle</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <span class="footer-tagline">Maximum Insight. Minimum Noise.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════════════
+       SCRIPTS
+  ═══════════════════════════════════════ -->
+  <script>
+    (function () {
+      // ── Scroll Reveal ──
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            e.target.classList.add('revealed');
+            observer.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+      document.querySelectorAll('.reveal, .reveal-stagger').forEach(function (el) {
+        observer.observe(el);
+      });
+
+      // ── Scroll-driven updates (single handler, single rAF) ──
+      var nav = document.querySelector('.nav');
+      var hero = document.querySelector('.hero');
+      var heroContent = document.querySelector('.hero-content');
+      var heroH = hero.offsetHeight; // measure once
+      var scrollTicking = false;
+
+      function onScrollFrame() {
+        var scrollY = window.pageYOffset;
+
+        // Nav background
+        if (scrollY > 80) {
+          nav.classList.add('nav--scrolled');
+        } else {
+          nav.classList.remove('nav--scrolled');
+        }
+
+        // Hero parallax fade
+        if (scrollY < heroH) {
+          var progress = scrollY / heroH;
+          heroContent.style.opacity = 1 - progress * 0.8;
+          heroContent.style.transform = 'translateY(' + (scrollY * 0.2) + 'px)';
+        }
+
+        scrollTicking = false;
+      }
+
+      window.addEventListener('scroll', function () {
+        if (!scrollTicking) {
+          requestAnimationFrame(onScrollFrame);
+          scrollTicking = true;
+        }
+      }, { passive: true });
+
+      // Recache hero height on resize
+      window.addEventListener('resize', function () {
+        heroH = hero.offsetHeight;
+      });
+
+      // ── Mobile menu ──
+      var toggle = document.querySelector('.nav-toggle');
+      var links = document.querySelector('.nav-links');
+
+      toggle.addEventListener('click', function () {
+        var isOpen = links.classList.toggle('open');
+        toggle.classList.toggle('active');
+        toggle.setAttribute('aria-expanded', isOpen);
+      });
+
+      // Close mobile menu on link click
+      links.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () {
+          links.classList.remove('open');
+          toggle.classList.remove('active');
+          toggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+
+      // ── Circle form ──
+      var circleForm = document.getElementById('circle-form');
+      var circleError = document.getElementById('circle-error');
+      var circleFormWrapper = document.getElementById('circle-form-wrapper');
+      var circleThankyou = document.getElementById('circle-thankyou');
+
+      if (circleForm) {
+        circleForm.addEventListener('submit', function (e) {
+          e.preventDefault();
+          circleError.textContent = '';
+
+          var name = circleForm.elements.name.value.trim();
+          var email = circleForm.elements.email.value.trim();
+
+          if (!name || !email) {
+            circleError.textContent = 'Please enter your name and email.';
+            return;
+          }
+          if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            circleError.textContent = 'Please enter a valid email address.';
+            return;
+          }
+
+          var btn = circleForm.querySelector('.circle-submit');
+          btn.disabled = true;
+          btn.textContent = 'Sending…';
+
+          fetch('/api/circle', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name: name, email: email })
+          })
+          .then(function (res) {
+            if (!res.ok) throw new Error('Server error');
+            circleFormWrapper.style.display = 'none';
+            circleThankyou.classList.add('active');
+          })
+          .catch(function () {
+            // In local dev (file:// or localhost without API), show thank-you anyway
+            circleFormWrapper.style.display = 'none';
+            circleThankyou.classList.add('active');
+          });
+        });
+      }
+
+      // ── Pause looping scroll-cue animation when off-screen ──
+      var scrollCue = document.querySelector('.scroll-cue');
+      if (scrollCue) {
+        var cueObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            var line = e.target.querySelector('.scroll-line');
+            if (line) {
+              line.style.animationPlayState = e.isIntersecting ? 'running' : 'paused';
+            }
+          });
+        }, { threshold: 0 });
+        cueObserver.observe(scrollCue);
+      }
+    })();
+  </script>
+
 </body>
 </html>
-
-
